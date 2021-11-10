@@ -15,19 +15,16 @@
     </md-app-toolbar>
 
     <md-app-content>
-      <song-view />
+      <router-view />
     </md-app-content>
   </md-app>
 </template>
 
 <script>
-import SongView from '@/components/SongView'
-
 export default {
     name: 'App',
 
     components: {
-        SongView,
     },
 
     methods: {

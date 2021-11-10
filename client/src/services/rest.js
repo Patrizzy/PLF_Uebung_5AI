@@ -29,6 +29,22 @@ export function loadPage(Entity, pageNum = 0, params = {}) {
 }
 
 
+export function saveEntity(entity) {
+    return axios
+        .put(entity._links.self.href, entity)
+        .then(response => {
+            // Aktualisierten Satz in eine Entity umwandeln
+            const saved = new entity.constructor(response.data)
+            console.log('rest.saveEntity() OK', saved)
+
+            return saved
+        })
+        .catch(response => {
+            console.error('rest.saveEntity() error', response)
+        })
+}
+
+
 export function deleteEntity(entity) {
     return axios
         .delete(entity._links.self.href)

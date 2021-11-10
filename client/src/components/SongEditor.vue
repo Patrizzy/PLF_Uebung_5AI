@@ -34,6 +34,7 @@
 
 <script>
 import Song from '@/models/Song'
+import { saveEntity } from '@/services/rest'
 
 export default {
     name: 'SongEditor',
@@ -47,7 +48,10 @@ export default {
 
     methods: {
         save() {
-            this.$router.back()
+            saveEntity(this.song)
+                .then(savedSong => {
+                    this.$router.back()
+                })
         },
     },
 }

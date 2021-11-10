@@ -42,7 +42,7 @@ export default {
     props: {
         song: {
             type: Song,
-            required: true,
+            default: () => new Song(),
         },
     },
 

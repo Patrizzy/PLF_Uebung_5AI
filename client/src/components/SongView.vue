@@ -4,6 +4,12 @@
         <page-nav :page="page" @navigated="load"/>
     </div>
 
+    <md-speed-dial class="md-bottom-right">
+      <md-speed-dial-target :to="{ name: 'song-editor' }">
+          <md-icon>add</md-icon>
+      </md-speed-dial-target>
+    </md-speed-dial>
+
     <song
         v-for="s in page.entities"
         :key="s._links.self.href"

@@ -30,10 +30,13 @@ export function loadPage(Entity, pageNum = 0, params = {}) {
 
 
 export function saveEntity(entity) {
-    return axios
-        .put(entity._links.self.href, entity)
+    const promise = entity.isNew()
+        ? axios.post(`${API_BASE}/${entity.constructor.path}`, entity)
+        : axios.put(entity._links.self.href, entity)
+
+    return promise
         .then(response => {
-            // Aktualisierten Satz in eine Entity umwandeln
+            // Resultat wieder in eine Entity umwandeln
             const saved = new entity.constructor(response.data)
             console.log('rest.saveEntity() OK', saved)
 

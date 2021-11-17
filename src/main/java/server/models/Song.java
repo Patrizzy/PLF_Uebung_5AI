@@ -3,10 +3,10 @@ package server.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -17,10 +17,20 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Ein Lied benötigt einen Titel.")
+    @Size(min = 4)
+    @Column(unique = true)
     private String title;
 
+    @NotBlank
     private String artist;
 
+    @NotBlank
     private String genre;
+
+    private String duration;
+
+    @Transient
+    private Integer size;
 
 }

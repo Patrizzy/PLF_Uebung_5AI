@@ -9,32 +9,56 @@
             </div>
 
             <div class="md-toolbar-section-end">
-                <md-button class="md-icon-button" @click="save">
+                <md-button class="md-icon-button"
+                     @click="save"
+                     :disabled="$v.$invalid">
                     <md-icon>check</md-icon>
                 </md-button>
             </div>
         </md-toolbar>
 
-        <md-field>
+        <md-vuelidated
+            field="md-field"
+            class="md-layout-item">
             <label>Titel</label>
             <md-input type="text" v-model="song.title" />
-        </md-field>
 
-        <md-field>
-            <label>Interpret</label>
-            <md-input type="text" v-model="song.artist" />
-        </md-field>
+            <md-vuelidated-msg constraint="required">
+                Dies ist ein Pflichtfeld.
+            </md-vuelidated-msg>
+            <md-vuelidated-msg constraint="minLength" v-slot="{ min }">
+              Der Titel muss mindestens {{ min }} Zeichen lang sein.
+            </md-vuelidated-msg>
+        </md-vuelidated>
 
-        <md-field>
-            <label>Genre</label>
-            <md-input type="text" v-model="song.genre" />
-        </md-field>
+        <md-vuelidated
+            field="md-field"
+            class="md-layout-item">
+          <label>Interpret</label>
+          <md-input type="text" v-model="song.artist" />
+
+          <md-vuelidated-msg constraint="required">
+            Dies ist ein Pflichtfeld.
+          </md-vuelidated-msg>
+        </md-vuelidated>
+
+        <md-vuelidated
+            field="md-field"
+            class="md-layout-item">
+          <label>Genre</label>
+          <md-input type="text" v-model="song.genre" />
+
+          <md-vuelidated-msg constraint="required">
+            Dies ist ein Pflichtfeld.
+          </md-vuelidated-msg>
+        </md-vuelidated>
     </div>
 </template>
 
 <script>
 import Song from '@/models/Song'
 import { saveEntity } from '@/services/rest'
+import { required, minLength, between } from 'vuelidate/lib/validators'
 
 export default {
     name: 'SongEditor',
@@ -54,6 +78,21 @@ export default {
                 })
         },
     },
+
+    validations: {
+        song: {
+            title: {
+              required,
+              minLength: minLength(4)
+            },
+            artist: {
+              required,
+            },
+            genre: {
+              required,
+            },
+        }
+    }
 }
 </script>
 

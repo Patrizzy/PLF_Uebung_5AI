@@ -52,6 +52,12 @@
             Dies ist ein Pflichtfeld.
           </md-vuelidated-msg>
         </md-vuelidated>
+
+      <div v-if="errors">
+        <span v-for="error in errors">
+          {{ error.message }}
+        </span>
+      </div>
     </div>
 </template>
 
@@ -70,11 +76,19 @@ export default {
         },
     },
 
+    data: () => ({
+      errors: []
+    }),
+
     methods: {
         save() {
             saveEntity(this.song)
                 .then(savedSong => {
                     this.$router.back()
+                })
+                .catch(errors => {
+                  console.log("in editor: ",errors)
+                  this.errors = errors
                 })
         },
     },
@@ -83,7 +97,7 @@ export default {
         song: {
             title: {
               required,
-              minLength: minLength(4)
+              minLength: minLength(2)
             },
             artist: {
               required,

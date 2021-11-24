@@ -43,7 +43,8 @@ export function saveEntity(entity) {
             return saved
         })
         .catch(response => {
-            console.error('rest.saveEntity() error', response)
+            console.log('rest.saveEntity() error', response.response )
+            return Promise.reject(response.response)
         })
 }
 

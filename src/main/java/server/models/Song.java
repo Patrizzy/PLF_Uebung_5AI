@@ -17,6 +17,9 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Version
+    private long version;
+
     @NotBlank(message = "Ein Lied benötigt einen Titel.")
     @Size(min = 4)
     @Column(unique = true)
@@ -32,5 +35,10 @@ public class Song {
 
     @Transient
     private Integer size;
+
+
+    public long getETag() {
+        return version;
+    }
 
 }

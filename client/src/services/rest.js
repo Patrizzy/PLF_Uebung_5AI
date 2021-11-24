@@ -25,6 +25,7 @@ export function loadPage(Entity, pageNum = 0, params = {}) {
         })
         .catch(response => {
             console.error('rest.loadPage() error', response)
+            return Promise.reject(response)
         })
 }
 
@@ -32,7 +33,7 @@ export function loadPage(Entity, pageNum = 0, params = {}) {
 export function saveEntity(entity) {
     const promise = entity.isNew()
         ? axios.post(`${API_BASE}/${entity.constructor.path}`, entity)
-        : axios.put(entity._links.self.href, entity)
+        : axios.put(entity._links.self.href, entity, { headers: { 'If-Match': entity.etag } })
 
     return promise
         .then(response => {
@@ -43,8 +44,8 @@ export function saveEntity(entity) {
             return saved
         })
         .catch(response => {
-            console.log('rest.saveEntity() error', response.response )
-            return Promise.reject(response.response)
+            console.log('rest.saveEntity() error', response )
+            return Promise.reject(response)
         })
 }
 
@@ -57,5 +58,6 @@ export function deleteEntity(entity) {
         })
         .catch(response => {
             console.error('rest.deleteEntity() error', response)
+            return Promise.reject(response)
         })
 }

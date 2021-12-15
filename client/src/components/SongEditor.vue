@@ -53,10 +53,14 @@
           </md-vuelidated-msg>
         </md-vuelidated>
 
-        <md-field>
-            <label>Audiodatei</label>
-            <md-file @md-change="readAudioFile" accept="audio/*" />
-        </md-field>
+        <div class="md-layout md-alignment-center-left">
+            <md-field class="md-layout-item">
+                <label>Audiodatei</label>
+                <md-file @md-change="readAudioFile" accept="audio/*" />
+            </md-field>
+
+            <audio class="md-layout-item md-flex-nogrow" :src="song.audio" controls></audio>
+        </div>
 
         <div v-if="errors">
         <span v-for="error in errors">
@@ -129,5 +133,9 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+}
+
+.song-editor audio.md-layout-item {
+    height: 24px;
 }
 </style>

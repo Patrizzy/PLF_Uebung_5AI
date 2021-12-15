@@ -56,7 +56,7 @@
         <div class="md-layout md-alignment-center-left">
             <md-field class="md-layout-item">
                 <label>Audiodatei</label>
-                <md-file @md-change="readAudioFile" accept="audio/*" />
+                <md-file @md-change="readAudioFile" v-model="song.filename" accept="audio/*" />
             </md-field>
 
             <audio class="md-layout-item md-flex-nogrow" :src="song.audio" controls></audio>
@@ -123,6 +123,7 @@ export default {
               required,
             },
             audio: {},
+            filename: {},
         }
     }
 }

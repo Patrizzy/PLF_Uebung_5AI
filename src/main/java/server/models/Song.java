@@ -37,6 +37,8 @@ public class Song {
     @Lob
     private String audio;
 
+    private String filename;
+
     @Transient
     private Integer size;
 

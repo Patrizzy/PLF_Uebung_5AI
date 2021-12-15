@@ -53,11 +53,16 @@
           </md-vuelidated-msg>
         </md-vuelidated>
 
-      <div v-if="errors">
+        <md-field>
+            <label>Audiodatei</label>
+            <md-file @md-change="readAudioFile" accept="audio/*" />
+        </md-field>
+
+        <div v-if="errors">
         <span v-for="error in errors">
           {{ error.message }}
         </span>
-      </div>
+        </div>
     </div>
 </template>
 
@@ -91,6 +96,14 @@ export default {
                   this.errors = errors
                 })
         },
+
+        readAudioFile(fileList) {
+            const reader = new FileReader()
+            reader.onload = event => {
+                this.song.audio = event.target.result
+            }
+            reader.readAsDataURL(fileList[0])
+        },
     },
 
     validations: {
@@ -105,6 +118,7 @@ export default {
             genre: {
               required,
             },
+            audio: {},
         }
     }
 }

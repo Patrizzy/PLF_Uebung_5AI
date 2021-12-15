@@ -1,8 +1,9 @@
 <template>
-    <div class="md-layout md-alignment-center-left">
+    <div class="song md-layout md-alignment-center-left">
         <div class="md-layout-item">{{ song.title }}</div>
         <div class="md-layout-item md-size-20">{{ song.artist }}</div>
         <div class="md-layout-item md-size-20">{{ song.genre }}</div>
+        <audio class="md-layout-item" :src="song.audio" controls></audio>
 
         <md-button class="md-icon-button md-dense" :to="{ name: 'song-editor', params: { song } }">
             <md-icon>edit</md-icon>
@@ -36,6 +37,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+.song audio.md-layout-item {
+    height: 24px;
+}
 </style>

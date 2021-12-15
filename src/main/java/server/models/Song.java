@@ -33,6 +33,10 @@ public class Song {
 
     private String duration;
 
+    // Audio-Track als Data-URL
+    @Lob
+    private String audio;
+
     @Transient
     private Integer size;
 

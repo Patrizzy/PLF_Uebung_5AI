@@ -11,14 +11,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
-public class Song {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Version
-    private long version;
+public class Song extends Persistent {
 
     @NotBlank(message = "Ein Lied benötigt einen Titel.")
     @Size(min = 4)
@@ -41,10 +34,5 @@ public class Song {
 
     @Transient
     private Integer size;
-
-
-    public long getETag() {
-        return version;
-    }
 
 }

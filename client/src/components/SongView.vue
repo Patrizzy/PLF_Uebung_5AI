@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="song-view">
     <div>
         <page-nav :page="page" @navigated="load"/>
     </div>
@@ -56,5 +56,11 @@ export default {
 </script>
 
 <style scoped>
+.song-view .page-nav {
+    margin-bottom: 1em;
+}
 
+.song-view .song:nth-child(2n+1) {
+    background-color: #f0f0f0;
+}
 </style>

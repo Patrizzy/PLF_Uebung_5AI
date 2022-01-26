@@ -1,5 +1,5 @@
 <template>
-    <div class="md-layout md-alignment-center-center">
+    <div class="page-nav md-layout md-alignment-center-center">
         <md-button
                 class="md-icon-button md-raised md-dense"
                 @click="navigate(0)"

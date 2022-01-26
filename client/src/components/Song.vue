@@ -1,9 +1,20 @@
 <template>
     <div class="song md-layout md-alignment-center-left">
         <div class="md-layout-item">{{ song.title }}</div>
+
         <div class="md-layout-item md-size-20">{{ song.artist }}</div>
-        <div class="md-layout-item md-size-20">{{ song.genre }}</div>
-        <audio class="md-layout-item" :src="song.audio" controls></audio>
+
+        <div class="md-layout-item md-size-30">
+            <span class="genre" v-for="g in song.genres" :key="g">{{ g }}</span>
+        </div>
+
+        <md-button
+            class="md-icon-button md-dense"
+            @click="togglePlaying"
+        >
+            <md-icon v-show="!isPlaying()">play_arrow</md-icon>
+            <md-icon v-show="isPlaying()">stop</md-icon>
+        </md-button>
 
         <md-button class="md-icon-button md-dense" :to="{ name: 'song-editor', params: { song } }">
             <md-icon>edit</md-icon>
@@ -17,6 +28,7 @@
 
 <script>
 import { deleteEntity } from '@/services/rest'
+import { play, playing, stop } from '@/services/player'
 
 export default {
     name: 'Song',
@@ -33,12 +45,41 @@ export default {
                     this.$emit('deleted')
                 })
         },
+
+        playSong() {
+            play(this.song)
+        },
+
+        stopSong() {
+            stop()
+        },
+
+        togglePlaying() {
+            if (this.isPlaying()) {
+                stop()
+
+            } else {
+                play(this.song)
+            }
+        },
+
+        isPlaying() {
+            return this.song === playing
+        },
     },
 }
 </script>
 
 <style>
+.song {
+    padding: 0.25em;
+}
+
 .song audio.md-layout-item {
     height: 24px;
+}
+
+.song .genre + .genre::before {
+    content: ', '
 }
 </style>

@@ -12,8 +12,8 @@
             class="md-icon-button md-dense"
             @click="togglePlaying"
         >
-            <md-icon v-show="!isPlaying()">play_arrow</md-icon>
-            <md-icon v-show="isPlaying()">stop</md-icon>
+            <md-icon v-show="!isPlaying">play_arrow</md-icon>
+            <md-icon v-show="isPlaying">stop</md-icon>
         </md-button>
 
         <md-button class="md-icon-button md-dense" :to="{ name: 'song-editor', params: { song } }">
@@ -38,6 +38,12 @@ export default {
         required: true,
     },
 
+    computed: {
+        isPlaying() {
+            return this.$store.state.playing === this.song
+        },
+    },
+
     methods: {
         deleteSong() {
             deleteEntity(this.song)
@@ -46,25 +52,13 @@ export default {
                 })
         },
 
-        playSong() {
-            play(this.song)
-        },
-
-        stopSong() {
-            stop()
-        },
-
         togglePlaying() {
-            if (this.isPlaying()) {
+            if (this.isPlaying) {
                 stop()
 
             } else {
                 play(this.song)
             }
-        },
-
-        isPlaying() {
-            return this.song === playing
         },
     },
 }

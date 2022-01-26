@@ -42,15 +42,13 @@
           </md-vuelidated-msg>
         </md-vuelidated>
 
-        <md-vuelidated
-            field="md-field"
-            class="md-layout-item">
-          <label>Genre</label>
-          <md-input type="text" v-model="song.genre" />
-
-          <md-vuelidated-msg constraint="required">
-            Dies ist ein Pflichtfeld.
-          </md-vuelidated-msg>
+        <md-vuelidated field="md-chips" v-model="song.genres" :md-auto-insert="true" md-placeholder="Genres*">
+            <md-vuelidated-msg constraint="required">
+                Mindestens ein Genre muss angegeben werden.
+            </md-vuelidated-msg>
+            <md-vuelidated-msg constraint="minLength">
+                Mindestens ein Genre muss angegeben werden.
+            </md-vuelidated-msg>
         </md-vuelidated>
 
         <div class="md-layout md-alignment-center-left">
@@ -113,14 +111,15 @@ export default {
     validations: {
         song: {
             title: {
-              required,
-              minLength: minLength(2)
+                required,
+                minLength: minLength(2)
             },
             artist: {
-              required,
+                required,
             },
-            genre: {
-              required,
+            genres: {
+                required,
+                minLength: minLength(1)
             },
             audio: {},
             filename: {},

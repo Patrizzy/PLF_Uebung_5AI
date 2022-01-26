@@ -2,6 +2,8 @@ package server.models;
 
 import org.springframework.data.rest.core.config.Projection;
 
+import java.util.Set;
+
 @Projection(name = "ohneAudio", types = Song.class)
 public interface SongOhneAudio {
 
@@ -11,7 +13,7 @@ public interface SongOhneAudio {
 
     String getArtist();
 
-    String getGenre();
+    Set<String> getGenres();
 
     String getFilename();
 

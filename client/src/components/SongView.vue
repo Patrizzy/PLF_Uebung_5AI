@@ -46,7 +46,7 @@ export default {
 
     methods: {
         load(pageNum = 0) {
-            loadPage(SongEntity, pageNum, { size: 6 })
+            loadPage(SongEntity, pageNum, { size: 6, projection: 'ohneAudio' })
                 .then(page => {
                     this.page = page
                 })

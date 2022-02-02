@@ -2,7 +2,7 @@
     <div class="song md-layout md-alignment-center-left">
         <div class="md-layout-item">{{ song.title }}</div>
 
-        <div class="md-layout-item md-size-20">{{ song.artist }}</div>
+        <div class="md-layout-item md-size-20">{{ song.artist.name }}</div>
 
         <div class="md-layout-item md-size-30">
             <span class="genre" v-for="g in song.genres" :key="g">{{ g }}</span>

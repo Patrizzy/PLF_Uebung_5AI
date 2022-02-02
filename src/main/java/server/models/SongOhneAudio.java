@@ -11,8 +11,6 @@ public interface SongOhneAudio {
 
     String getTitle();
 
-    String getArtist();
-
     Set<String> getGenres();
 
     String getFilename();

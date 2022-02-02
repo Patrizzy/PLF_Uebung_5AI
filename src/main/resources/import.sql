@@ -1,3 +1,17 @@
+insert into artist (id, version, name) values (1, 0, 'Ardys Yosselevitch');
+insert into artist (id, version, name) values (2, 0, 'Harriott Goad');
+insert into artist (id, version, name) values (3, 0, 'Gianni Hazzard');
+insert into artist (id, version, name) values (4, 0, 'Demetre Tilford');
+insert into artist (id, version, name) values (5, 0, 'Henrietta Twittey');
+insert into artist (id, version, name) values (6, 0, 'Joella Lanston');
+insert into artist (id, version, name) values (7, 0, 'Antonino Maryska');
+insert into artist (id, version, name) values (8, 0, 'Alonzo Arundell');
+insert into artist (id, version, name) values (9, 0, 'Addia Tongs');
+insert into artist (id, version, name) values (10, 0, 'Corri Banat');
+insert into artist (id, version, name) values (11, 0, 'Isacco Mugford');
+insert into artist (id, version, name) values (12, 0, 'Maxwell Whitley');
+insert into artist (id, version, name) values (13, 0, 'Sidonia Goodfield');
+
 insert into song (id, version, title, artist) values (1, 0,  'Oak, The (Balanta)', 'Leonie Breinlein');
 insert into song (id, version, title, artist) values (2, 0,  'Commare secca, La (Grim Reaper, The)', 'Frasquito Anney');
 insert into song (id, version, title, artist) values (3, 0,  'Tequila Sunrise', 'Julianna Buscombe');

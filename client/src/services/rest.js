@@ -14,21 +14,27 @@ const API_BASE = 'http://localhost:8080/api'
  *   Entity        (erforderlich) Entity-Klasse, liefert auch den Pfad im REST-API
  *   pageNum       Nummer der zu ladenden Seite (erste Seite: 0)
  *   params        Namen und Werte der Request-Parameter als Objekt
+ *   query         Name der serverseitigen Query-Methode, falls
+ *                 eine solche verwendet werden soll
  */
-export function loadPage(Entity, pageNum = 0, params = {}) {
+export function loadPage(Entity, pageNum = 0, params = {}, query) {
+    // REST-URL vorbereiten
+    let url = query
+        ? `${API_BASE}${Entity.path}/search/${query}`
+        : `${API_BASE}${Entity.path}`
+
     return axios
-        .get(
-            `${API_BASE}/${Entity.path}`,
-            { params: { page: pageNum, ...params } }
-        )
+        .get(url, { params: { page: pageNum, ...params } })
         .then(response => {
             const page = new Page(Entity, response)
+
+            // Seitennummer im zulässigen Bereich, oder keine Seiten?
             if (page.entities.length || (pageNum === 0)) {
-                // Entities available, or not entities at all
                 console.log('rest.loadPage() OK', page)
                 return page
 
             } else {
+                // Letzte vorhandene Seite ausliefern
                 return loadPage(Entity, pageNum-1, params)
             }
         })
@@ -73,7 +79,7 @@ export function loadEntity(Entity, href, params) {
 export function saveEntity(entity) {
     const promise = entity.isNew()
         ? axios.post(`${API_BASE}/${entity.constructor.path}`, entity)
-        : axios.put(entity._links.self.href, entity, { headers: { 'If-Match': entity.etag } })
+        : axios.patch(entity._links.self.href, entity, { headers: { 'If-Match': entity.etag } })
 
     return promise
         .then(response => {

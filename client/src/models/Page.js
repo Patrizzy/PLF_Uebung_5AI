@@ -2,7 +2,7 @@ export default class Page {
 
     constructor(Entity, response) {
         if (response) {
-            this.entities = response.data._embedded[Entity.path].map(obj => new Entity(obj))
+            this.entities = response.data[Entity.path].map(obj => new Entity(obj))
             Object.assign(this, response.data.page)
         } else {
             this.entities = []

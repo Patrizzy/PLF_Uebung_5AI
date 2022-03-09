@@ -23,4 +23,8 @@ public interface SongRepository extends PagingAndSortingRepository<Song, Long> {
 
     Page<Song> findByArtistNameContainsIgnoreCase(String name, Pageable p);
 
+
+    Page<Song> findByTitleContainsAndArtistNameContainsAllIgnoreCase(
+            String title, String name, Pageable p);
+
 }

@@ -1,12 +1,11 @@
-export default class Song {
+import Persistent from '@/models/Persistent'
+
+export default class Song extends Persistent {
 
     constructor(obj) {
-        Object.assign(this, obj)
+        super(obj)
     }
 
-    isNew() {
-        return !this._links
-    }
 }
 
 // Pfad dieser Entities im REST-API des Servers

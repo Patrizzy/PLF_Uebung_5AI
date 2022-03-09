@@ -31,16 +31,18 @@
             </md-vuelidated-msg>
         </md-vuelidated>
 
-        <md-vuelidated
-            field="md-field"
-            class="md-layout-item">
-          <label>Interpret</label>
-          <md-input type="text" v-model="song.artist" />
-
-          <md-vuelidated-msg constraint="required">
-            Dies ist ein Pflichtfeld.
-          </md-vuelidated-msg>
-        </md-vuelidated>
+        <md-autocomplete
+                v-model="song.artist.name"
+                :md-options="artistPromise"
+                @md-changed="searchArtists"
+                @md-opened="searchArtists"
+                @md-selected="selectArtist"
+        >
+            <label>Interpret</label>
+            <template slot="md-autocomplete-item" slot-scope="{ item, term }">
+                <md-highlight-text :md-term="term">{{ item.name }}</md-highlight-text>
+            </template>
+        </md-autocomplete>
 
         <md-vuelidated field="md-chips" v-model="song.genres" :md-auto-insert="true" md-placeholder="Genres*">
             <md-vuelidated-msg constraint="required">
@@ -70,7 +72,8 @@
 
 <script>
 import Song from '@/models/Song'
-import { saveEntity } from '@/services/rest'
+import Artist from '@/models/Artist'
+import { saveEntity, loadPage } from '@/services/rest'
 import { required, minLength, between } from 'vuelidate/lib/validators'
 
 export default {
@@ -84,8 +87,16 @@ export default {
     },
 
     data: () => ({
-      errors: []
+        artists: [],
+        errors: [],
+        selectedArtistName: null,
     }),
+
+    computed: {
+        artistPromise() {
+            return Promise.resolve(this.artists)
+        },
+    },
 
     methods: {
         save() {
@@ -106,6 +117,16 @@ export default {
             }
             reader.readAsDataURL(fileList[0])
         },
+
+        searchArtists(suchbegriff) {
+            loadPage(Artist, 0, { size: 99999, name: suchbegriff || '' }, 'findByNameContainsIgnoreCase')
+                .then(page => this.artists = page.entities)
+
+        },
+
+        selectArtist(artist) {
+            this.song.artist = artist
+        },
     },
 
     validations: {
@@ -115,7 +136,7 @@ export default {
                 minLength: minLength(2)
             },
             artist: {
-                required,
+                //required,
             },
             genres: {
                 required,

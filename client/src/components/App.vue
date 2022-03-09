@@ -7,6 +7,8 @@
     <md-app-toolbar class="md-primary md-dense">
       <div class="md-toolbar-section-start">
         <router-link to="/" class="md-title">YouSong</router-link>
+
+        <router-link to="/artists">Interpreten</router-link>
       </div>
 
       <div class="md-subheading md-toolbar-section-end">

@@ -13,12 +13,12 @@
       <div class="header md-layout md-alignment-center-left">
         <md-field class="md-layout-item">
             <label>Titel</label>
-            <md-input type="text" v-model="title" @input="load" />
+            <md-input type="text" v-model="title" @input="load(0)" />
         </md-field>
 
         <md-field class="md-layout-item">
             <label>Interpret</label>
-            <md-input type="text" v-model="name" @input="load" />
+            <md-input type="text" v-model="name" @input="load(0)" />
         </md-field>
       </div>
 

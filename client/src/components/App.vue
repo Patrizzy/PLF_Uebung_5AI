@@ -1,8 +1,8 @@
 <template>
   <md-app
-    v-cloak
-    md-waterfall
-    md-mode="fixed"
+      v-cloak
+      md-waterfall
+      md-mode="fixed"
   >
     <md-app-toolbar class="md-primary md-dense">
       <div class="md-toolbar-section-start">
@@ -10,25 +10,28 @@
       </div>
 
       <div class="md-subheading md-toolbar-section-end">
-          <router-link to="/artists" class="md-title">Interpreten</router-link>
+        <router-link to="/artists" class="md-title">Interpreten</router-link>
+      </div>
+
+      <div class="md-subheading md-toolbar-section-end">
+        <router-link to="/genres" class="md-title">Genres</router-link>
       </div>
     </md-app-toolbar>
 
+
     <md-app-content>
-      <router-view />
+      <router-view/>
     </md-app-content>
   </md-app>
 </template>
 
 <script>
 export default {
-    name: 'App',
+  name: 'App',
 
-    components: {
-    },
+  components: {},
 
-    methods: {
-    },
+  methods: {},
 }
 </script>
 

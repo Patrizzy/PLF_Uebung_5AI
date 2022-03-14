@@ -73,7 +73,7 @@ export default {
     height: 24px;
 }
 
-.song .genre + .genre::before {
-    content: ', '
-}
+/*.song .genre + .genre::before {*/
+/*    content: ', '*/
+/*}*/
 </style>

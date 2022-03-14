@@ -21,9 +21,8 @@ public class Song extends Persistent {
     @ManyToOne(optional = false)
     private Artist artist;
 
-    @ElementCollection
-    @NotEmpty
-    private Set<@NotBlank String> genres;
+    @ManyToOne(optional = false)
+    private Genre genre;
 
     private String duration;
 

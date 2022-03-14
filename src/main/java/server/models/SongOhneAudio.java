@@ -13,7 +13,7 @@ public interface SongOhneAudio {
 
     ArtistNurName getArtist();
 
-    Set<String> getGenres();
+    Genre getGenre();
 
     String getFilename();
 
